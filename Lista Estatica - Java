@@ -1,0 +1,149 @@
+public class Lista {
+
+	
+	int nmrElementos;
+	 int[] vet;
+	 
+	
+	public Lista(int t) {
+		vet = new int[t];
+		nmrElementos = 0;
+	}
+	
+	 boolean listaVazia() {
+		if(nmrElementos == 0) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
+		boolean listaCheia() {
+		if( nmrElementos >= vet.length) {
+			return true;
+			
+			
+		} else {
+			return false;
+		}
+			
+		
+	}
+		void adicionarFinal(int e) {
+		if(listaCheia()) {
+			System.out.println("ERRO! esta cheio");
+			
+		} else {
+		int	indice = nmrElementos;
+		vet[indice] = e;
+		nmrElementos = nmrElementos + 1;
+		
+		}
+			
+		}
+	
+	 int removerFinal() {
+		if(listaVazia()) {
+			System.out.println("ERRO! esta vazia");
+		} else {
+			int indice = nmrElementos - 1;
+			int elementoRemovido = vet[indice];
+			nmrElementos = indice;
+			return elementoRemovido;
+		}
+		
+		return 0;
+		
+	
+	}
+	
+	void adicionarInicio(int e) {
+		if(listaCheia()) {
+			System.out.println("ERRO! Estrutura cheia.");
+			
+		} else { 
+			for ( int i = nmrElementos; 0 < i; i--) {
+			vet[i] = vet[i-1];
+			}
+			vet[0] = e;
+			nmrElementos = nmrElementos + 1;
+		}
+		
+		
+			
+	}
+		
+	
+	
+	
+	int removerInicio() {
+		int elementoRemovido = vet[0];
+		if(listaVazia()) {
+			System.out.println("ERRO! A Estrutura esta vazia.");
+		} else {
+		
+			for(int i = 1; i < nmrElementos  ;i++) {
+				vet[i-1] = vet[i];
+				
+			}
+			
+		}
+		nmrElementos = nmrElementos - 1;
+		return elementoRemovido;
+	}
+	
+	void adicionarPosicao(int e,int i) {
+		if(listaCheia()) {
+			System.out.println("ERRO! A Estrutura esta cheia");
+			
+		} else {
+			if(i <= 0) {
+				adicionarInicio(e);
+			} else if(i>= nmrElementos) {
+				adicionarFinal(e);
+			}else {
+				for( i = nmrElementos ; nmrElementos < i ;i++) {
+					vet[i] = vet[i -1];
+					
+				}
+				vet[i] = e;
+				nmrElementos = nmrElementos + 1;
+			}
+		}
+		
+	}
+	
+	
+	
+	
+	int removerPosição(int i) {
+		int elementoRemovido = vet[i];
+		if(listaVazia()) {
+			System.out.println("ERRO! A Estrutura esta vazia.");
+			
+		} else {
+			if(i<= 0) {
+				return removerInicio();
+			} else if(i>= nmrElementos) {
+				return removerFinal();
+			} else {
+				
+				for (int x = i; x < nmrElementos - 1;x++) {
+					vet[x] = vet[x + 1];
+				}
+				nmrElementos = nmrElementos - 1;
+				
+				
+			}
+		}
+		return elementoRemovido;
+		
+	}
+	
+	
+	public void exibir() {
+		for (int i = 0; i < nmrElementos; i++) {
+			System.out.println(vet[i]);
+		}
+	}
+}
