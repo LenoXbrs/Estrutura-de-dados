@@ -1,0 +1,135 @@
+public class ListaDinamica {
+	 private No inicioLista;
+	    private No finalLista;
+
+	    public ListaDinamica() {
+	        inicioLista = null;
+	        finalLista = null;
+	    }
+	    
+	    public boolean listaVazia() {
+	    	if(inicioLista == null) {
+	    		return true;
+	    	} else {
+	    		return false;
+	    	}
+	    }
+	    
+	    
+	    
+	    public void adicionarInicio(int e) {
+	        No novo = new No(e);
+
+	        if (listaVazia()) { 
+	            inicioLista = novo;
+	            finalLista = novo;
+	        } else {
+	            novo.proximo_no = inicioLista;
+	            inicioLista = novo;
+	        }
+	    }
+	    
+	    public void adicionarFinal(int e) {
+	        No novo = new No(e);
+	       
+	        if (listaVazia()) { 
+	            inicioLista = novo;
+	            finalLista = novo;
+	        } else {
+	            finalLista.proximo_no = novo;
+	            finalLista = novo;
+	        }
+	    }
+
+	  
+
+	    public No removerFinal() {
+	   No removido;
+	   removido = null;
+	    if(listaVazia()) {
+	    	System.out.println("Erro estrutura vazia");
+	    } else {
+	    	No aux = null;
+	    	removido = aux = inicioLista;
+	    	
+	    	while(removido.proximo_no != null) {
+	    		aux = removido;
+	    		removido = removido.proximo_no;
+	    	}
+	    	aux.proximo_no = null;
+	    }
+	    	return removido;
+	    }
+	    
+	    
+
+	    public No removerInicio() {
+	      No removido;
+	      removido = null;
+	      if(listaVazia()) {
+	    	  System.out.println("Erro estrutura vazia.");
+	      } else {
+	    	  removido = inicioLista;
+	    	  inicioLista = inicioLista.proximo_no;
+	      }
+	      return removido;
+	    }
+
+	    public void exibir() {
+	        No no = inicioLista;
+
+	        while (no != null) {
+	            System.out.print(no.elemento + " ");
+	            no = no.proximo_no;
+	        }
+
+	        
+	    }
+	    
+	    public void adicionarPosicao(int e,int i) {
+	    	if(listaVazia() || i <= 1) {
+	    		adicionarInicio(e);
+	    	} else {
+	    		No novo = new No(e);
+	    		No aux = null;
+	    		aux = inicioLista;
+	    		int indice = 1;
+	    		while(indice < i && aux != null) {
+	    			aux = aux.proximo_no;
+	    			indice++;
+	    		}
+	    	if(aux == null) {
+	    			adicionarFinal(e);
+	    	} else {
+	    			novo.proximo_no = aux.proximo_no;
+	    			aux.proximo_no = novo;
+	    		}
+	    	}
+	    }
+	    
+	    
+	    public No removerPosicao(int i) {
+	    	No removido;
+	    	removido = null;
+	    	if(listaVazia() || i <= 1) {
+	    		removido = removerInicio();
+	    	} else {
+	    		No aux;
+	    		aux = null;
+	    		removido = aux = inicioLista;
+	    		int indice = 1;
+	    		while(indice  < i && removido != null) {
+	    			aux = removido;
+	    			removido = removido.proximo_no;
+	    			indice = indice + 1;
+	    		}
+	    	if(removido == null) {
+	    		removido = removerFinal();
+	    	}else {
+	    		aux.proximo_no = removido.proximo_no;
+	    	}
+	    	}
+	    	
+	    	return removido;
+	    }
+}
